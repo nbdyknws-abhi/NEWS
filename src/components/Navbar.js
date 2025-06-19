@@ -1,37 +1,33 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Navbar.css';
+import { FaMoon } from 'react-icons/fa';
 
 export class Navbar extends Component {
- 
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">  // dark mode in title bar
-  <div className="container-fluid">
-    <Link className="navbar-brand"to="/">NewsMonkey</Link>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <Link className="nav-link" aria-current="page"to="/">Home</Link>
-        </li>
-        <li className="nav-item"><Link className="nav-link"to="/business">Business</Link></li>
-        <li className="nav-item"><Link className="nav-link"to="/entertainment">Entertainment</Link></li>
-        <li className="nav-item"><Link className="nav-link"to="/general">General</Link></li>
-        <li className="nav-item"><Link className="nav-link"to="/health">Health</Link></li>
-        <li className="nav-item"><Link className="nav-link"to="/science">Science</Link></li>
-        <li className="nav-item"><Link className="nav-link"to="/sports">Sports</Link></li>
-        <li className="nav-item"><Link className="nav-link"to="/technology">Technology</Link></li>
-        </ul>
-      
-    </div>
-  </div>
-</nav>
-      </div>
-    )
+      <nav className="custom-navbar sticky-top">
+        <div className="container-fluid d-flex justify-content-between align-items-center">
+          <Link className="navbar-brand fw-bold" to="/">📰 NewsMonkey</Link>
+          
+          <div className="nav-links d-none d-lg-flex">
+            <Link className="nav-link" to="/">Home</Link>
+            <Link className="nav-link" to="/business">Business</Link>
+            <Link className="nav-link" to="/entertainment">Entertainment</Link>
+            <Link className="nav-link" to="/general">General</Link>
+            <Link className="nav-link" to="/health">Health</Link>
+            <Link className="nav-link" to="/science">Science</Link>
+            <Link className="nav-link" to="/sports">Sports</Link>
+            <Link className="nav-link" to="/technology">Technology</Link>
+          </div>
+
+          <button onClick={this.props.toggleDarkMode} className="dark-toggle-btn">
+            <FaMoon />
+          </button>
+        </div>
+      </nav>
+    );
   }
 }
 
-export default Navbar
+export default Navbar;

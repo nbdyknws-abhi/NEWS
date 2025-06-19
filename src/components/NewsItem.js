@@ -1,43 +1,53 @@
 import React, { Component } from "react";
+import { motion } from "framer-motion";
+import fallbackImg from "../assets/no-image.png";
+import '../styles/NewsItem.css';
 
 export class NewsItem extends Component {
   render() {
-    let { title, description, imageurl, newsurl, author, date, source } = this.props;
-
-    console.log("Source prop value:", source);
+    const { title, description, imageurl, newsurl, author, date, source } = this.props;
 
     return (
-      <div className="my-3">
-        <div className="card">
+      <motion.div
+        className="my-3"
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="card news-card shadow-sm">
           {source && (
-            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <span className="badge bg-danger source-badge">
               {source}
             </span>
           )}
           <img
-            src={!imageurl ? "https://image.cnbcfm.com/api/v1/image/108114425-1741734596822-gettyimages-1096026706-1.jpeg?v=1741734632&w=1920&h=1080" : imageurl}
-            className="card-img-top"
-            alt="..."
+            src={imageurl || fallbackImg}
+            alt="news"
+            loading="lazy"
+            className="card-img-top news-img"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = fallbackImg;
+            }}
           />
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
             <p className="card-text">
-              <small className="text-body-secondary">
-                By {author ? author : "unknown"} on {new Date(date).toGMTString()}
+              <small className="text-muted">
+                By {author || "NewsBot"} on {new Date(date).toDateString()}
               </small>
             </p>
             <a
-              rel="noreferrer"
               href={newsurl}
               target="_blank"
-              className="btn btn-sm btn-primary"
+              rel="noreferrer"
+              className="btn btn-outline-primary btn-sm read-more-btn"
             >
-              Read More.....
+              Read More →
             </a>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 }
