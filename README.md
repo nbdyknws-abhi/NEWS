@@ -32,6 +32,7 @@ NewsMonkey is a responsive and modern news web application built with **React.js
 
 ## 📁 Folder Structure
 
+```bash
 src/
 ├── assets/ # Static assets like loading.gif, fallback images
 ├── styles/ # CSS files for components
