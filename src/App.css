@@ -1,12 +1,49 @@
-/* Theme Variables */
-body {
+/* ===========================
+   THEME VARIABLES
+   =========================== */
+:root {
   --card-bg: #ffffff;
   --text-color: #000000;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --accent-color: #0d6efd;
+  --hover-shadow: rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode {
   --card-bg: #1e1e1e;
   --text-color: #f5f5f5;
+  --shadow-color: rgba(255, 255, 255, 0.1);
+  --hover-shadow: rgba(255, 255, 255, 0.2);
+  --accent-color: #4dabf7;
+}
+
+/* ===========================
+   GENERAL STYLES
+   =========================== */
+body {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ===========================
+   CARD STYLING
+   =========================== */
+.card {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  transition: all 0.4s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+body.dark-mode .card {
+  backdrop-filter: blur(10px);
+  background: rgba(30, 30, 30, 0.7); /* Glassmorphism in dark mode */
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card-title,
@@ -15,32 +52,80 @@ body.dark-mode {
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 8px 20px var(--hover-shadow);
 }
 
+/* Neon Glow in Dark Mode */
+body.dark-mode .card:hover {
+  box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color);
+}
+
+/* ===========================
+   BUTTON STYLING
+   =========================== */
 .read-more-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  background: transparent;
+  border-radius: 8px;
   transition: all 0.3s ease;
-  border-color: #0d6efd;
-  color: #0d6efd;
+  position: relative;
+  overflow: hidden;
 }
 
 .read-more-btn:hover {
-  background-color: #0d6efd;
+  background-color: var(--accent-color);
   color: #fff;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px var(--hover-shadow);
 }
 
-:root {
-  --card-bg: #ffffff;
-  --text-color: #000000;
+/* Animated button ripple effect */
+.read-more-btn::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
 }
 
-body.dark {
-  --card-bg: #1e1e1e;
-  --text-color: #f1f1f1;
+.read-more-btn:hover::after {
+  width: 200%;
+  height: 500%;
 }
 
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .read-more-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* ===========================
+   DARK MODE BACKGROUND
+   =========================== */
 body.dark-mode {
   background-color: #121212;
-  color: #f5f5f5;
+}
+
+/* Optional: Smooth theme toggle animation */
+html {
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
